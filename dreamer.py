@@ -112,26 +112,26 @@ class Dreamer(nn.Module):
         self._metrics.setdefault("_plan_prob_metric", []).append(this_prob)
 
         #:-1539
-        # if random.random() > (this_prob * this_prob):
-        #     #No need to save the secondary metrics if a plan wasn't enacted
-        #     meta_sec_actions = None
-        #     ap_logprob_sec = None
-        #     implemented = False
-        # else:
-        #We go into plan
-        self._in_plan = True
-        #A plan will be enacted
-        implemented = True
-        #A new traj will be planned
-        self._replan_traj = True
-        #Get the actions out of the object
-        self._plan_hor, self._ent_weight = meta_sec_actions[0]
-        #Convert them into real parameters
-        self._plan_hor = int(((self._plan_hor + 1) / 5) * 15)
-        self._ent_weight = float(self._ent_weight / 4)
-        #Log them
-        self._metrics.setdefault("_plan_hor_metric", []).append(self._plan_hor)
-        self._metrics.setdefault("_plan_ent_metric", []).append(self._ent_weight)
+        if random.random() > (this_prob * this_prob):
+            #No need to save the secondary metrics if a plan wasn't enacted
+            meta_sec_actions = None
+            ap_logprob_sec = None
+            implemented = False
+        else:
+            #We go into plan
+            self._in_plan = True
+            #A plan will be enacted
+            implemented = True
+            #A new traj will be planned
+            self._replan_traj = True
+            #Get the actions out of the object
+            self._plan_hor, self._ent_weight = meta_sec_actions[0]
+            #Convert them into real parameters
+            self._plan_hor = int(((self._plan_hor + 1) / 5) * 15)
+            self._ent_weight = float(self._ent_weight / 4)
+            #Log them
+            self._metrics.setdefault("_plan_hor_metric", []).append(self._plan_hor)
+            self._metrics.setdefault("_plan_ent_metric", []).append(self._ent_weight)
 
 
         self._plan_b._add_to_buffer(
