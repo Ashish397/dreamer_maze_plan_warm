@@ -239,7 +239,7 @@ def main():
 
     load_data(
         replay_buffer=replay_buffer,
-        data_path='/home/shadeform/dataset/random_data',
+        data_path=data_path_preloaded,
     )
 
     # ============================================================================
