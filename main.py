@@ -186,8 +186,9 @@ def main():
 
     # Initialize the replay buffer
     replay_buffer = ReplayBuffer(
-        storage=LazyTensorStorage(
+        storage=LazyMemmapStorage(
             max_size=int(config.dataset_size / config.time_limit),
+            scratch_dir=data_path + '//' + exp_date
         ),
         prefetch=1,
         batch_size=torch.Size([256, config.time_limit]),
@@ -245,6 +246,10 @@ def main():
         replay_buffer=replay_buffer,
         data_path=data_path_preloaded,
     )
+
+    delete(data_path_preloaded)
+
+
 
     # ============================================================================
     #   REPRODUCABILITY
