@@ -10,6 +10,10 @@
 # ============================================================================
 #   IMPORTS
 # ----------------------------------------------------------------------------
+import pyglet
+pyglet.options['headless'] = True
+
+import register_envs
 
 import shutil
 import zipfile
