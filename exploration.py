@@ -208,9 +208,9 @@ class PlanBehavior(nn.Module):
 
             last_linear.bias.data[3] = biases[sorted_indices[0]]
             last_linear.bias.data[2] = biases[sorted_indices[1]]
-            last_linear.bias.data[4] = biases[random_indices[0]]
-            last_linear.bias.data[1] = biases[random_indices[1]]
-            last_linear.bias.data[0] = biases[random_indices[2]]
+            last_linear.bias.data[4] = biases[sorted_indices[random_indices[0]]]
+            last_linear.bias.data[1] = biases[sorted_indices[random_indices[1]]]
+            last_linear.bias.data[0] = biases[sorted_indices[random_indices[2]]]
 
             print("Biases after reassigning:", last_linear.bias.data)
 
